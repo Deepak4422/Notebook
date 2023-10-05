@@ -12,14 +12,12 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 
 function App() {
-    const [state, setState]=useState(true);
-  setTimeout(()=>{
-    setState(false);
-  },3000);
+  
+
   const [alert, setAlert]=useState(null);
-  const alertShow=()=>{
+  const alertShow=(message, type)=>{
     setAlert({
-      message: msg,
+      message: message,
       type: type
     });
     setTimeout(()=>{
@@ -32,11 +30,11 @@ function App() {
    <Notestate>
    <Router> 
         <Navbar/>
-       { state && <Alert message={"Items has been deleted"}/>}
+       { alert && <Alert alert={alert}/>}
         <div className="container">
         <Routes>
                 <Route exact path='/' element={< Home alertShow={alertShow}  />}></Route>
-                <Route exact path='/about' element={< About alertShow={alertShow} />}></Route>
+                <Route exact path='/about' element={< About />}></Route>
                 <Route exact path="/login" element={< Login alertShow={alertShow} />}></Route>
                 <Route exact path="/signup" element={< Signup alertShow={alertShow}/>}></Route>
         </Routes>

@@ -5,7 +5,7 @@ const Notestate = (props) => {
   const s1 = [ ];
   const [notes, setNotes] = useState(s1);
 
-  // ge the notes from mongodB
+  // get the notes from mongodB
   const getNote =async () => {
     const response = await fetch(`${host}/api/notes/fetchnotes`, {
         method: "GET",
@@ -33,7 +33,7 @@ const Notestate = (props) => {
       console.log(await response.json());
 
     const s = {
-      " _id": Math.random() * 100,
+      "_id": Math.random() * 100,
       title: title,
       description: description,
       " tag": tag,

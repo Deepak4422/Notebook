@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import {useNavigate } from 'react-router-dom'
 
-const Signup = () => {
+const Signup = (props) => {
     const [sign, setSign]=useState({name:"", email:"", password:""})
     const navigate=useNavigate();
     const onsubmit=async (e)=>{
@@ -21,9 +21,10 @@ const Signup = () => {
           {
             localStorage.setItem("token", json.authtoken);
             navigate("/");
+            props.alertShow("Signup Successfully","success");
           }
           else{
-            alert("Invalid details");
+            props.alertShow("Signup failed","danger")
           }
 
 

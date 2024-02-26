@@ -17,7 +17,11 @@ const Notestate = (props) => {
        
       });
       const json=await response.json();
-      setNotes(json);
+      if(json.success)
+      {
+        setNotes(json);
+      }
+      
     }
 
   const addNote =async (title, description, tag) => {
@@ -51,9 +55,10 @@ const Notestate = (props) => {
       },
       body: JSON.stringify({title,description,tag}),
     });
+    await response.json(); 
     
  const newNote=JSON.parse(JSON.stringify(notes));
-    for (let index = 0; index < notes.length; index++) {
+    for (let index = 0; index < newNote.length; index++) {
       const element = notes[index];
       if (element._id === id) {
         newNote[index].title = title;
@@ -66,7 +71,7 @@ const Notestate = (props) => {
   };
   //delete a note
   const deleteNote = async (id) => {
-    const response = await fetch(`${host}/api/notes/deletenotes/${id}`, {
+    await fetch(`${host}/api/notes/deletenotes/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

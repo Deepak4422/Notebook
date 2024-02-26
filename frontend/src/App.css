@@ -13,16 +13,7 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+
 
 .App-link {
   color: #61dafb;
@@ -35,4 +26,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+#root{
+  background: linear-gradient(rgb(127, 244, 212), rgb(127, 246, 127));
+}
+.container{
+  background:transparent;
+}
+
+.card-body{
+  background-color:rgb(137, 252, 248);
+}
+
+nav{
+  color:white;
+  background-color:rgb(100, 229, 164)
+}
+
+.btn{
+  background-color:rgb(227, 47, 77);
 }

@@ -19,25 +19,25 @@ router.post('/createUser', [
         }
         try{
             const findemail=await User.findOne({email: req.body.email});
-        if(findemail)
-        {
-           return  res.status(400).json({success,error: "This email address is already in use"});
-        }
-        
-        const salt=await bcrypt.genSalt(10);
-        const newpassword=await bcrypt.hash(req.body.password,salt);
-        const user = await User.create({email: req.body.email, password: newpassword, name: req.body.name});
-        const data={
-            user: {
-                id: user.id
-            }
-        }
-        const authtoken=jwt.sign(data, JWT_SECRET);
-        success=true
-        res.json({success,authtoken});
+                        if(findemail)
+                        {
+                        return  res.status(400).json({success,error: "This email address is already in use"});
+                        }
+                        
+                        const salt=await bcrypt.genSalt(10);
+                        const newpassword=await bcrypt.hash(req.body.password,salt);
+                        const user = await User.create({email: req.body.email, password: newpassword, name: req.body.name});
+                        const data={
+                            user: {
+                                id: user.id
+                            }
+                        }
+                        const authtoken=jwt.sign(data, JWT_SECRET);
+                        success=true
+                        res.json({success,authtoken});
         }
         catch(err){
-            res.status(500).send({message: err.message});
+                       res.status(500).send({message: err.message});
         }
     });
 
@@ -59,26 +59,26 @@ router.post('/createUser', [
            return  res.status(400).json({success: success,error:"Please login with correct credentials"});
         }
        try{
-        let compare=  await bcrypt.compare(req.body.password, find.password);
-       if(!compare)
-       {
-        return res.status(400).json({success: success,error:"Please login with correct credentials"});
-       }
-       const data={
-        user:{
-            id: find.id
-        }
-       }
-       const authtoken=jwt.sign(data,JWT_SECRET);
-       success=true;
-       res.json({success, authtoken});
+                    let compare=  await bcrypt.compare(req.body.password, find.password);
+                if(!compare)
+                {
+                    return res.status(400).json({success: success,error:"Please login with correct credentials"});
+                }
+                const data={
+                    user:{
+                        id: find.id
+                    }
+                }
+                const authtoken=jwt.sign(data,JWT_SECRET);
+                success=true;
+                res.json({success, authtoken});
        }
        catch(error){
-        console.error(error.message);
-        res.status(500).send("Some error occured");
+                console.error(error.message);
+                res.status(500).send("Some error occured");
        }
            
-       // user login details route 
+       // user login details route  getting all the notes
 
        router.get('/getuser', fetchuser,
         async (req,res)=>{

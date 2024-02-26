@@ -5,6 +5,8 @@ import {useNavigate } from 'react-router-dom'
 const Signup = (props) => {
     const [sign, setSign]=useState({name:"", email:"", password:""})
     const navigate=useNavigate();
+
+    
     const onsubmit=async (e)=>{
         
    e.preventDefault();
@@ -34,7 +36,7 @@ const Signup = (props) => {
     }
   return (
     <div className="container">
-        <form onSubmit={onsubmit} >
+        <form  onSubmit={onsubmit} >
         <div className="mb-3">
     <label htmlFor="name" className="form-label">Name</label>
     <input type="text" className="form-control" onChange={onchange} id="name" aria-describedby="emailHelp"/>
@@ -48,7 +50,7 @@ const Signup = (props) => {
     <input type="password" className="form-control" onChange={onchange} id="password" minLength={5} required/>
   </div>
   
-  <button type="submit" className="btn btn-primary">Submit</button>
+  <button   type="submit" className="btn btn-primary">Submit</button>
 </form>
      
     </div>

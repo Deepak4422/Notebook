@@ -3,52 +3,62 @@ import notecontext from '../Contexts/Notes/Notecontext'
 import { useContext,useRef } from 'react';
 import Noteitem from './Noteitem';
 import { useNavigate } from 'react-router-dom';
+import AddNotes from './AddNotes'
+
 const Notes = (props) => {
   let history=useNavigate();
   
     const context=useContext(notecontext);
    
     const [note,setNote]=useState({_id:"",title:"",description:"",tag:""})
-    
     const {notes,getNote,editNote}=context;
+ 
+    const {alertShow}=props;
+
+
     useEffect(()=>{
-      if(localStorage.getItem("token"))
+     
+      if(localStorage.getItem('token'))
       {
       getNote();
       }
       else{
-      history("/login");
+      history('/login');
       }
     },[]);
-    const ref=useRef(null);
+
+    
     const refclose=useRef(null);
-   const updateNote=(notes)=>{
-     ref.current.click();
-     setNote({id:notes._id, title:notes.title, description:notes.description, tag:notes.tag})
+
+
+   const updateNote=(note)=>{
+   
+  
+     
    }
+
+
   
  const onpress=(e)=>{
-e.preventDefault();
 
 editNote(note.id ,note.title,note.description,note.tag);
-refclose.current.click();
+refclose.current.focus();
 
  }
+
 
  const onChange=(e)=>{
   setNote({...note, [e.target.id]:e.target.value})
  }
 
   return (
-    <div >
+    < >
      
-    
-<button type="button" ref={ref} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
+     <AddNotes  alertShow={alertShow}/>
 
+     
 
-<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div className="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" >
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header">
@@ -77,7 +87,7 @@ refclose.current.click();
       </div>
       <div className="modal-footer">
         <button type="button" ref={refclose}  className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button"  className="btn btn-primary" onClick={onpress}>Edit Note</button>
+        <button type="button"  onClick={onpress} className="btn btn-primary">Edit Note</button>
       </div>
     </div>
   </div>
@@ -85,14 +95,16 @@ refclose.current.click();
 
 
       <div className="row my-3">
+      <h2>You Notes</h2>
         <div className="container">
+       
         {notes.length===0 && "Note is not present"}
         </div>
       {notes.map(note=>{
         return <Noteitem key={note._id} updateNote={updateNote} notes={note} />
       })}
       </div>
-    </div>
+    </>
   )
 }
 
